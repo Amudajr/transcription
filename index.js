@@ -93,10 +93,10 @@ app.post("/youtube", (req, res) => {
   const videoPath = path.join(DOWNLOAD_DIR, `${uuidv4()}.mp4`);
   const audioPath = videoPath.replace(".mp4", ".wav");
   const safeUrl = shellEscape(url);
-  const ytDlpPath = path.join(__dirname, ".render", "bin", "yt-dlp");
+  const ytDlpPath = "/opt/render/project/src/.render/bin/yt-dlp";
 
-  exec(
-    `${shellEscape(ytDlpPath)} -o ${shellEscape(videoPath)} -f bestaudio ${safeUrl}`,
+exec(
+  `${shellEscape(ytDlpPath)} -o ${shellEscape(videoPath)} -f bestaudio ${safeUrl}`,
     (err, stdout, stderr) => {
       if (err) {
         console.error("YouTube download failed:", err, stderr);
