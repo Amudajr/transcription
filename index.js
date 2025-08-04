@@ -7,7 +7,7 @@ const path = require("path");
 const cors = require("cors");
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 
 const UPLOAD_DIR = path.join(__dirname, "uploads");
 const DOWNLOAD_DIR = path.join(__dirname, "downloads");
@@ -93,7 +93,7 @@ app.post("/youtube", (req, res) => {
   const videoPath = path.join(DOWNLOAD_DIR, `${uuidv4()}.mp4`);
   const audioPath = videoPath.replace(".mp4", ".wav");
   const safeUrl = shellEscape(url);
-  const ytDlpPath = "/opt/render/project/src/.render/bin/yt-dlp";
+  const ytDlpPath = "yt-dlp"; // This assumes yt-dlp is in PATH
 
 exec(
   `${shellEscape(ytDlpPath)} -o ${shellEscape(videoPath)} -f bestaudio ${safeUrl}`,
